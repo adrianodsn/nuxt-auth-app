@@ -6,7 +6,7 @@
       <div class="content">
         <p>
           <strong>Username:</strong>
-          {{ loggedInUser.username }}
+          {{ loggedInUser.name }}
         </p>
         <p>
           <strong>Email:</strong>

@@ -17,44 +17,37 @@ module.exports = {
       }
     ]
   },
+
+  mode: 'universal',
   /*
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
-  /*
-  ** Build configuration
-  */
-  build: {
-    /*
-    ** Run ESLint on save
-    */
-    extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
-  },
+
+  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
+  buildModules: [
+    // https://go.nuxtjs.dev/eslint
+    '@nuxtjs/eslint-module',
+  ],
 
   modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
 
   axios: {
-    baseURL: 'http://127.0.0.1:3333/api'
+    baseURL: 'http://localhost:8000/api'
   },
 
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
+          login: { url: 'auth/login', method: 'post', propertyName: 'data.access_token' },
+          user: { url: 'auth/me', method: 'get', propertyName: 'data' },
           logout: false
         }
       }
     }
-  }
+  },
+
+  // Build Configuration (https://go.nuxtjs.dev/config-build)
+  build: {},
 }
