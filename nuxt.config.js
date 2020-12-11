@@ -39,14 +39,36 @@ module.exports = {
   auth: {
     strategies: {
       local: {
+        scheme: 'refresh',
+        token: {
+          property: 'access_token',
+          type: 'Bearer', // `tokenType` is now `token.type`
+          required: true // `tokenRequired` is now `token.required`
+        },
+        refreshToken: {
+          property: 'access_token' // change to your refresh token property
+        },
         endpoints: {
-          login: { url: 'auth/login', method: 'post', propertyName: 'data.access_token' },
+          login: { url: 'auth/login', method: 'post', propertyName: 'access_token' },
+          refresh: { url: '/auth/refresh', method: 'post', propertyName: 'access_token' }, // change to your refresh token url
           user: { url: 'auth/me', method: 'get', propertyName: 'data' },
           logout: false
         }
       }
     }
   },
+
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: 'auth/login', method: 'post', propertyName: 'data.access_token' },
+  //         user: { url: 'auth/me', method: 'get', propertyName: 'data' },
+  //         logout: false
+  //       }
+  //     }
+  //   }
+  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
