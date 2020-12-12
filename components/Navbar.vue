@@ -17,8 +17,13 @@
             class="navbar-item has-dropdown is-hoverable"
             v-if="isAuthenticated"
           >
+            <!-- <div
+            class="navbar-item has-dropdown is-hoverable"
+            v-if="$auth.$state.loggedIn"
+          > -->
             <a class="navbar-link">
               {{ loggedInUser.name }}
+              <!-- {{ $auth.user.name }} -->
             </a>
             <div class="navbar-dropdown">
               <nuxt-link class="navbar-item" to="/profile"

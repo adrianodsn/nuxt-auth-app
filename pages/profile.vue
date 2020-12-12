@@ -7,10 +7,12 @@
         <p>
           <strong>Username:</strong>
           {{ loggedInUser.name }}
+          <!-- {{ $auth.user.name }} -->
         </p>
         <p>
           <strong>Email:</strong>
           {{ loggedInUser.email }}
+          <!-- {{ $auth.user.email }} -->
         </p>
       </div>
     </div>

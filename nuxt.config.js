@@ -30,31 +30,55 @@ module.exports = {
     '@nuxtjs/eslint-module',
   ],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
   axios: {
-    baseURL: 'http://localhost:8000/api'
+    baseURL: 'http://localhost:8000'
   },
 
   auth: {
+    localStorage: false,
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/profile'
+    },
     strategies: {
-      local: {
-        scheme: 'refresh',
-        token: {
-          property: 'access_token',
-          type: 'Bearer', // `tokenType` is now `token.type`
-          required: true // `tokenRequired` is now `token.required`
-        },
-        refreshToken: {
-          property: 'access_token' // change to your refresh token property
-        },
+      // local: {
+      //   token: {
+      //     property: 'access_token',
+      //   }
+      // },
+      // localRefresh: {
+      //   scheme: 'refresh',
+      //   token: {
+      //     property: 'access_token',
+      //     maxAge: 15
+      //   },
+      //   refreshToken: {
+      //     property: 'access_token',
+      //     maxAge: false
+      //   }
+      // },
+      laravelJWT: {
+        provider: 'laravel/jwt',
+        url: '/',
         endpoints: {
-          login: { url: 'auth/login', method: 'post', propertyName: 'access_token' },
-          refresh: { url: '/auth/refresh', method: 'post', propertyName: 'access_token' }, // change to your refresh token url
-          user: { url: 'auth/me', method: 'get', propertyName: 'data' },
-          logout: false
+          login: {
+            url: '/api/auth/login'
+          },
+          refresh: {
+            url: '/api/auth/refresh'
+          },
+          logout: {
+            url: '/api/auth/logout'
+          },
+          user: {
+            url: '/api/auth/user'
+          }
         }
-      }
+      },
     }
   },
 

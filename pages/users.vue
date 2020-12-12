@@ -18,7 +18,7 @@ export default {
   },
 
   async asyncData({ $axios }) {
-    const {data} = await $axios.get('/users');
+    const {data} = await $axios.get('/api/users');
     return { users : data }
   }
 }

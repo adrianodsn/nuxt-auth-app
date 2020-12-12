@@ -5,10 +5,9 @@
         <div class="column is-4 is-offset-4">
           <h2 class="title has-text-centered">Register!</h2>
 
-          <Notification :message="error" v-if="error"/>
+          <Notification :message="error" v-if="error" />
 
           <form method="post" @submit.prevent="register">
-
             <div class="field">
               <label class="label">Username</label>
 
@@ -16,10 +15,10 @@
                 <input
                   type="text"
                   class="input"
-                  name="username"
-                  v-model="username"
+                  name="name"
+                  v-model="name"
                   required
-                >
+                />
               </div>
             </div>
 
@@ -33,7 +32,7 @@
                   name="email"
                   v-model="email"
                   required
-                >
+                />
               </div>
             </div>
 
@@ -47,12 +46,14 @@
                   name="password"
                   v-model="password"
                   required
-                >
+                />
               </div>
             </div>
 
             <div class="control">
-              <button type="submit" class="button is-dark is-fullwidth">Register</button>
+              <button type="submit" class="button is-dark is-fullwidth">
+                Register
+              </button>
             </div>
           </form>
 
@@ -77,7 +78,7 @@ export default {
 
   data() {
     return {
-      username: '',
+      name: '',
       email: '',
       password: '',
       error: null,
@@ -88,19 +89,19 @@ export default {
     async register() {
       try {
         await this.$axios.post('register', {
-          username: this.username,
+          name: this.name,
           email: this.email,
           password: this.password,
         });
 
-        await this.$auth.loginWith('local', {
+        await this.$auth.loginWith('laravelJWT', {
           data: {
             email: this.email,
             password: this.password,
           },
         });
 
-        this.$router.push('/');
+        this.$router.push('/profile');
       } catch (e) {
         this.error = e.response.data.message;
       }
