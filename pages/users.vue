@@ -2,13 +2,25 @@
   <section class="section">
     <div class="container">
       <h2 class="title">Users</h2>
-      <div v-for="user in users" :key="user.id">{{ user.name }}</div>
+      <hr />
+      <div v-for="(user, index) in users" :key="user.id">
+        <div>
+          <strong>{{
+            user.name + (user.email == loggedInUser.email ? " (me)" : "")
+          }}</strong>
+        </div>
+        <small>{{ user.email }}</small>
+        <hr v-if="index != users.length - 1" />
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
+
   middleware: 'auth',
 
   data() {
@@ -16,10 +28,14 @@ export default {
       users: []
     };
   },
-
+  
   async asyncData({ $axios }) {
-    const {data} = await $axios.get('/api/users');
-    return { users : data }
+    const {data} = await $axios.get('users');
+    return { users : data.data }
+  },
+
+  computed: {
+    ...mapGetters(['loggedInUser']),
   }
 }
 </script>

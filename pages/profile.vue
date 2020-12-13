@@ -2,18 +2,14 @@
   <section class="section">
     <div class="container">
       <h2 class="title">My Profile</h2>
-
+      <hr />
       <div class="content">
-        <p>
-          <strong>Username:</strong>
-          {{ loggedInUser.name }}
+        <div>
+          <strong>{{ loggedInUser.name }}</strong>
           <!-- {{ $auth.user.name }} -->
-        </p>
-        <p>
-          <strong>Email:</strong>
-          {{ loggedInUser.email }}
-          <!-- {{ $auth.user.email }} -->
-        </p>
+        </div>
+        <small>{{ loggedInUser.email }}</small>
+        <!-- {{ $auth.user.email }} -->
       </div>
     </div>
   </section>

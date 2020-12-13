@@ -66,16 +66,16 @@ module.exports = {
         url: '/',
         endpoints: {
           login: {
-            url: '/api/auth/login'
+            url: '/auth/login'
           },
           refresh: {
-            url: '/api/auth/refresh'
+            url: '/auth/refresh'
           },
           logout: {
-            url: '/api/auth/logout'
+            url: '/auth/logout'
           },
           user: {
-            url: '/api/auth/user'
+            url: '/auth/user'
           }
         }
       },

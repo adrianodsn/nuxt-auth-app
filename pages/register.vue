@@ -94,14 +94,18 @@ export default {
           password: this.password,
         });
 
-        await this.$auth.loginWith('laravelJWT', {
+        return this.$auth
+        .loginWith('laravelJWT', {
           data: {
             email: this.email,
-            password: this.password,
-          },
+            password: this.password
+          }
+        })
+        .catch((e) => {
+          this.error = e.response.data.message;
         });
 
-        this.$router.push('/profile');
+        //this.$router.push('/profile');
       } catch (e) {
         this.error = e.response.data.message;
       }
